@@ -1,5 +1,6 @@
 import React from "react"
 import TodoItem from "./TodoItem"
+import { getGist } from "../gist/init"
 
 interface Props {}
 
@@ -67,7 +68,9 @@ class TodoList extends React.Component<Props, State> {
       input: value,
     })
   }
-
+  componentDidMount() {
+    getGist("8759142b800011e43fd7c9a9d2c78682")
+  }
   render() {
     const { onSubmit, onChange, onToggle, onRemove } = this
     const { input, todoItems } = this.state
