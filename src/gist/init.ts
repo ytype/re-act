@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export async function getGist(gistId: string) {
+export const getGist = async (gistId: string) => {
   const url = "https://api.github.com/gists"
   let raw_url = ""
   await axios.get(`${url}/${gistId}`).then((response) => {
@@ -9,7 +9,12 @@ export async function getGist(gistId: string) {
     raw_url = files[fileName].raw_url
   })
 
-  await axios.get(raw_url).then((response) => {
-    console.log(response.data)
-  })
+  await axios
+    .get(raw_url)
+    .then((response) => {
+      return response
+    })
+    .catch((error) => {
+      return "error"
+    })
 }
