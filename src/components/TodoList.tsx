@@ -1,6 +1,6 @@
 import React from "react"
 import TodoItem from "./TodoItem"
-import { getGist } from "../gist/init"
+import axios from "axios"
 
 interface Props {}
 
@@ -12,6 +12,7 @@ interface TodoItemState {
 
 interface State {
   input: string
+  content: string
   todoItems: TodoItemState[]
 }
 
@@ -20,7 +21,28 @@ class TodoList extends React.Component<Props, State> {
 
   state: State = {
     input: "",
+    content: "",
     todoItems: [],
+  }
+
+  getRawUrl = async (gistId: string) => {
+    const url = "https://api.github.com/gists"
+    let raw_url = ""
+    await axios.get(`${url}/${gistId}`).then((response) => {
+      const files: any = response.data.files
+      const fileName: string = Object.keys(files)[0]
+      raw_url = files[fileName].raw_url
+    })
+    return raw_url
+  }
+  getGist = async () => {
+    const gistId = "8759142b800011e43fd7c9a9d2c78682"
+    const raw_url = await this.getRawUrl(gistId)
+    let data = ""
+    await axios.get(raw_url).then((response) => {
+      data = response.data
+    })
+    return data
   }
 
   onToggle = (id: number): void => {
@@ -69,19 +91,16 @@ class TodoList extends React.Component<Props, State> {
     })
   }
 
-  async gistTest() {
-    console.log(await getGist("8759142b800011e43fd7c9a9d2c78682"))
-  }
-
-  constructor(props: any) {
-    super(props)
-    this.gistTest()
+  async componentDidMount() {
+    const _content = await this.getGist()
+    this.setState({
+      content: _content,
+    })
   }
 
   render() {
     const { onSubmit, onChange, onToggle, onRemove } = this
-    const { input, todoItems } = this.state
-
+    const { input, todoItems, content } = this.state
     const todoItemList: React.ReactElement[] = todoItems.map((todo) => (
       <TodoItem
         key={todo.id}
@@ -95,6 +114,7 @@ class TodoList extends React.Component<Props, State> {
     return (
       <div>
         <h1>오늘 뭐하지?</h1>
+        <p>{content}</p>
         <form onSubmit={onSubmit}>
           <input onChange={onChange} value={input} />
           <button type="submit">추가하기</button>
