@@ -35,6 +35,7 @@ class TodoList extends React.Component<Props, State> {
     })
     return raw_url
   }
+
   getGist = async () => {
     const gistId = "8759142b800011e43fd7c9a9d2c78682"
     const raw_url = await this.getRawUrl(gistId)
@@ -43,6 +44,44 @@ class TodoList extends React.Component<Props, State> {
       data = response.data
     })
     return data
+  }
+
+  updateGist = async () => {
+    const url = "https://api.github.com"
+    const gistId = "8759142b800011e43fd7c9a9d2c78682"
+    const token: string = "efe4ab9dd87fc2264149539b06129be064661bfa"
+
+    const data = JSON.stringify({
+      description: "Hello World Examples",
+      files: {
+        "hello_world_ruby.txt": {
+          content:
+            "Run `ruby hello_world.rb` or `python hello_world.py` to print Hello World",
+          filename: "hello_world.md",
+        },
+        "hello_world_python.txt": null,
+        "new_file.txt": {
+          content: "This is a new placeholder file.",
+        },
+      },
+    })
+
+    /*
+    const star = await axios.put(`${url}/gists/${gistId}/star`, {
+      headers: {
+        Authorization: `token ${token}`,
+      },
+    })
+    console.log(star)
+*/
+
+    const res = await axios.patch(`${url}/gists/${gistId}`, data, {
+      headers: {
+        Authorization: `token ${token}`,
+      },
+      data: data,
+    })
+    console.log(res)
   }
 
   onToggle = (id: number): void => {
@@ -96,6 +135,7 @@ class TodoList extends React.Component<Props, State> {
     this.setState({
       content: _content,
     })
+    await this.updateGist()
   }
 
   render() {
@@ -114,7 +154,10 @@ class TodoList extends React.Component<Props, State> {
     return (
       <div>
         <h1>오늘 뭐하지?</h1>
-        <p>{content}</p>
+        {/* <p>{content}</p>*/}
+        <h1>myCounter</h1>
+        <button>+</button>
+        <button>-</button>
         <form onSubmit={onSubmit}>
           <input onChange={onChange} value={input} />
           <button type="submit">추가하기</button>
