@@ -1,10 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import TodoList from './components/TodoList'
+import React from "react"
+import ReactDOM from "react-dom"
+import Router from "./router/index"
+import { BrowserRouter } from "react-router-dom"
 
 ReactDOM.render(
-  <React.StrictMode>
-    <TodoList />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <BrowserRouter>
+    <Router />
+  </BrowserRouter>,
+  document.getElementById("root")
 )

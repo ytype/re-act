@@ -1,0 +1,9 @@
+$bg-gray: #f6f8fa;
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css);
+body {
+  background-color: $bg-gray;
+}
+
+* {
+  font-family: "Spoqa Han Sans", "Spoqa Han Sans JP", "Sans-serif";
+}
