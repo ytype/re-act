@@ -4,7 +4,6 @@ $title-font-size: 25px;
 
 .login-form {
   width: 60%;
-  margin-top: calc((100% - 569px) / 2);
   margin-left: auto;
   margin-right: auto;
 
@@ -30,6 +29,7 @@ $title-font-size: 25px;
         margin-left: $item-margin-left;
         margin-top: 20px;
       }
+
       input {
         width: 80%;
         font-size: 20px;
@@ -47,6 +47,7 @@ $title-font-size: 25px;
         }
       }
     }
+
     .login-btn {
       float: right;
       margin-right: 10%;

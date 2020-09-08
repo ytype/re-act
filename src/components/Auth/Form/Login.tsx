@@ -1,9 +1,19 @@
-import React, { useState, useCallback } from "react"
-import "./Login.scss"
+import React, { useState, useEffect } from "react"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
-const Login = () => {
+import "./Login.scss"
+import { IsValid } from "../../../gist/auth"
+
+const Login = ({ history }: any) => {
   const [ghToken, setGhToken] = useState("")
   const [gistId, setGistId] = useState("")
+
+  useEffect(() => {
+    if (IsValid()) {
+      history.push("/second")
+    }
+  }, [history])
 
   const onChangeGhToken = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGhToken(e.target.value)
@@ -14,13 +24,24 @@ const Login = () => {
   }
 
   const login = () => {
-    console.log("login")
+    if (!ghToken || !gistId) {
+      toast.error("😓 토큰과 gist아이디를 입력해주세요!")
+      return
+    }
     localStorage.setItem("ghToken", ghToken)
     localStorage.setItem("gistId", gistId)
+    toast("😀 토큰과 gist 아이디를 저장했습니다!")
+    console.log()
   }
 
   return (
     <div className="login-form">
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar
+        draggable
+      />
       <div className="header">Todo with Gist</div>
       <div className="content">
         <div className="form">
