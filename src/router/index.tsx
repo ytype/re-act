@@ -15,5 +15,6 @@ const Router = () => {
 }
 
 // <Route component={NotFound} /> for 404
+// rsi ReactSnippets
 
 export default Router
