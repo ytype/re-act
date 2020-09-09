@@ -11,9 +11,10 @@ type props = {
   id: number
   content: string
   done: boolean
+  time: number | null
 }
 
-const Item = ({ removeItem, doneItem, id, content, done }: props) => {
+const Item = ({ removeItem, doneItem, id, content, done, time }: props) => {
   const lineStyle = classNames({
     done: done === true,
   })
@@ -21,7 +22,7 @@ const Item = ({ removeItem, doneItem, id, content, done }: props) => {
   return (
     <div>
       <div onClick={() => doneItem(id)} className="container">
-        {done == false ? (
+        {done === false ? (
           <FontAwesomeIcon icon={faCircle} />
         ) : (
           <FontAwesomeIcon icon={faCheckCircle} />

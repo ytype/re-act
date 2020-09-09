@@ -1,4 +1,4 @@
-import { getRawUrl, getGist } from "../../gist/index"
+import { getRawUrl, getGist } from "../../util/gist/index"
 
 describe("git get, update 테스트", () => {
   it("raw url 테스트", async () => {

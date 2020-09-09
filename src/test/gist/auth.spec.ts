@@ -1,4 +1,4 @@
-import { IsValid } from "../../gist/auth"
+import { IsValid } from "../../util/gist/auth"
 
 const removelocalStorageItem = () => {
   localStorage.removeItem("key")

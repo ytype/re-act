@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react"
 import ReactApexChart from "react-apexcharts"
 import useWindowWidth from "../../../hook/size"
+import { calcTime } from "../../../util/time"
+import useForceUpdate from "use-force-update"
+import ApexCharts from "apexcharts"
+import { time } from "console"
 
-const Chart = () => {
-  const width = useWindowWidth()
-
-  const calcTime = (): number => {
-    const time = new Date()
-    const hour = time.getHours()
-    const minutes = time.getMinutes()
-
-    if (minutes > 30) {
-      return hour + 1
-    }
-    return hour
-  }
-
+const Chart = ({ timeArr }: any) => {
+  const forceUpdate = useForceUpdate()
+  let height = 300
+  let width = useWindowWidth()
   const [state, setState] = useState({
     series: [
       {
@@ -25,6 +19,7 @@ const Chart = () => {
     ],
     options: {
       chart: {
+        id: "reactchart",
         type: "line",
         zoom: {
           enabled: false,
@@ -45,14 +40,18 @@ const Chart = () => {
   })
 
   useEffect(() => {
-    const newState = state
-    const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-    newState.series[0].data = arr
-    setState(newState)
-  }, [state])
+    ApexCharts.exec("reactchart", "updateSeries", [
+      {
+        data: timeArr,
+      },
+    ])
+    const nextState = state
+    nextState.series[0].data = timeArr
+    setState(nextState)
+  }, [timeArr, state])
 
   return (
-    <div id="chart" onClick={() => console.log(calcTime())}>
+    <div id="chart">
       <ReactApexChart
         options={state.options}
         series={state.series}
