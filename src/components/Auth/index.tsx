@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 import "./style.scss"
-import { IsValid } from "../../util/gist/auth"
+import { IsValid } from "../../util/gist/index"
 
 const Login = ({ history }: any) => {
   const [ghToken, setGhToken] = useState("")

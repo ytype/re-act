@@ -20,20 +20,12 @@ export const getGist = async (gistId: string) => {
   return data
 }
 
-export const updateGist = async (gistId: string, token: string) => {
-  const url = "https://api.github.com"
-  const data = JSON.stringify({
-    description: "Hello World Examples",
-    files: {
-      "hello_world_ruby.txt": {
-        content:
-          "Run `ruby hello_world.rb` or `python hello_world.py` to print Hello World",
-        filename: "hello_world.md",
-      },
-      "hello_world_python.txt": null,
-      "new_file.txt": {
-        content: "This is a new placeholder file.",
-      },
-    },
-  })
+export const IsValid = () => {
+  const ghToken = localStorage["ghToken"]
+  const gistId = localStorage["gistId"]
+  if (ghToken && gistId) {
+    return true
+  } else {
+    return false
+  }
 }
