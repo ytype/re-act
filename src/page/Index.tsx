@@ -1,9 +1,12 @@
-import React from "react"
-import Login from "../components/Auth/Login"
-import "./Index.scss"
+import React, { Fragment } from "react"
+import List from "../components/Todo/List"
 
-const Index = ({ history }: any) => {
-  return <Login history={history} />
+const Index = () => {
+  return (
+    <Fragment>
+      <List />
+    </Fragment>
+  )
 }
 
 export default Index

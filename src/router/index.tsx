@@ -1,14 +1,15 @@
 import React from "react"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
+import Auth from "../page/Auth"
 import Index from "../page/Index"
-import Second from "../page/Second"
+import Todo from "../page/Index"
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Index} />
-        <Route path="/second" component={Second} />
+        <Route path="/auth" component={Auth} />
       </Switch>
     </BrowserRouter>
   )

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-import "./Login.scss"
+import "./style.scss"
 import { IsValid } from "../../gist/auth"
 
 const Login = ({ history }: any) => {
@@ -10,8 +10,9 @@ const Login = ({ history }: any) => {
   const [gistId, setGistId] = useState("")
 
   useEffect(() => {
+    console.log(IsValid())
     if (IsValid()) {
-      history.push("/second")
+      history.push("")
     }
   }, [history])
 
@@ -31,7 +32,6 @@ const Login = ({ history }: any) => {
     localStorage.setItem("ghToken", ghToken)
     localStorage.setItem("gistId", gistId)
     toast("😀 토큰과 gist 아이디를 저장했습니다!")
-    console.log()
   }
 
   return (

@@ -1,0 +1,83 @@
+import React, { useState, useEffect } from "react"
+import ReactApexChart from "react-apexcharts"
+import { Idata, Iitem } from "../../types/index"
+const Chart = () => {
+  const [state, setState] = useState({
+    series: [
+      {
+        name: "Desktops",
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+      },
+    ],
+    options: {
+      chart: {
+        height: 350,
+        type: "line",
+        zoom: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: "straight",
+      },
+      title: {
+        text: "Product Trends by Month",
+        align: "left",
+      },
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"],
+        },
+      },
+      xaxis: {
+        categories: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+        ],
+      },
+    },
+  })
+
+  const [fakeData, setFakeData] = useState<Idata>({
+    date: "2020/9/8",
+    items: [
+      { content: "test query 1", done: false },
+      { content: "test query 2", done: false },
+      { content: "test query 3", done: true },
+    ],
+  })
+
+  useEffect(() => {
+    console.log(
+      fakeData.items.filter((todo: Iitem) => {
+        return todo.done === true
+      }).length
+    )
+  }, [fakeData])
+
+  return (
+    <div id="chart">
+      <ReactApexChart
+        options={state.options}
+        series={state.series}
+        type="line"
+        height={350}
+      />
+    </div>
+  )
+}
+
+//todo: 이룬 계획 수 line chart
+//todo: 계획 이행률
+
+export default Chart
