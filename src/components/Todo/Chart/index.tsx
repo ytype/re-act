@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react"
 import ReactApexChart from "react-apexcharts"
 import useWindowWidth from "../../../hook/size"
 import { calcTime } from "../../../util/time"
-import useForceUpdate from "use-force-update"
 import ApexCharts from "apexcharts"
-import { time } from "console"
+import "./style.scss"
 
 const Chart = ({ timeArr }: any) => {
-  const forceUpdate = useForceUpdate()
-  let height = 300
   let width = useWindowWidth()
   const [state, setState] = useState({
     series: [

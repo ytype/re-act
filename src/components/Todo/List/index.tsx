@@ -3,6 +3,8 @@ import Item from "../Item"
 import { Iitem } from "../../../types/index"
 import Chart from "../Chart"
 import { calcTime } from "../../../util/time"
+import "react-toastify/dist/ReactToastify.css"
+import { ToastContainer, toast } from "react-toastify"
 
 const List = () => {
   const [items, setItems] = useState<Iitem[]>([])
@@ -14,19 +16,25 @@ const List = () => {
   }
 
   const addItem = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const newItem = {
-      id: index,
-      content: inputText,
-      done: false,
-      time: null,
+    if (inputText) {
+      const newItem = {
+        id: index,
+        content: inputText,
+        done: false,
+        time: null,
+      }
+      setIndex(index + 1)
+      setItems(items.concat(newItem))
+      setInputText("")
+      toast(`😀 ${inputText}를 등록했습니다.`)
+    } else {
+      toast.error("😓 텍스트를 입력해주세요!")
     }
-    setIndex(index + 1)
-    setItems(items.concat(newItem))
-    setInputText("")
   }
 
   const removeItem = (id: number) => {
     const nextItem: Iitem[] = items.filter((item) => {
+      toast(`😆 ${item.content}를 삭제했습니다.`)
       return item.id !== id
     })
     setItems(nextItem)
@@ -37,8 +45,10 @@ const List = () => {
       if (item.id === id) {
         if (item.done === false) {
           item.time = calcTime()
+          toast(`🙂 ${item.content}를 완료했습니다.`)
         } else {
           item.time = null
+          toast(`🙂 ${item.content}를 취소했습니다.`)
         }
         item.done = !item.done
       }
@@ -81,11 +91,16 @@ const List = () => {
 
   return (
     <div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar
+        draggable
+      />
       <p onClick={() => console.log(items)}>{timeArr}</p>
       <Chart timeArr={timeArr} />
       <input value={inputText} onChange={onChangeText} />
       {itemList}
-      {inputText}
       <button type="submit" onClick={addItem}>
         submit
       </button>
