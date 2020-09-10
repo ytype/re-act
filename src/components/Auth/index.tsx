@@ -10,7 +10,6 @@ const Login = ({ history }: any) => {
   const [gistId, setGistId] = useState("")
 
   useEffect(() => {
-    console.log(IsValid())
     if (IsValid()) {
       history.push("")
     }
@@ -31,7 +30,7 @@ const Login = ({ history }: any) => {
     }
     localStorage.setItem("ghToken", ghToken)
     localStorage.setItem("gistId", gistId)
-    toast("😀 토큰과 gist 아이디를 저장했습니다!")
+    history.push("")
   }
 
   return (

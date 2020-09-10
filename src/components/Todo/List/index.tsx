@@ -7,8 +7,15 @@ import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer, toast } from "react-toastify"
 import SaveButton from "../button/saveButton/index"
 import FetchButton from "../button/fetchButton/index"
+import { IsValid } from "../../../util/gist/token"
 
-const List = () => {
+const List = ({ history }: any) => {
+  useEffect(() => {
+    if (!IsValid()) {
+      history.push("/auth")
+    }
+  }, [history])
+
   const [items, setItems] = useState<Iitem[]>([])
   const [index, setIndex] = useState(0)
   const [inputText, setInputText] = useState("")

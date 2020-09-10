@@ -1,10 +1,10 @@
 import React, { Fragment } from "react"
 import List from "../components/Todo/List"
 
-const Index = () => {
+const Index = ({ history }: any) => {
   return (
     <Fragment>
-      <List />
+      <List history={history} />
     </Fragment>
   )
 }
