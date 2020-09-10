@@ -5,7 +5,6 @@ import Chart from "../Chart"
 import { calcTime } from "../../../util/time"
 import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer, toast } from "react-toastify"
-import { jsonToMd } from "../../../util/gist/markdown"
 import SaveButton from "../button/saveButton/index"
 import FetchButton from "../button/fetchButton/index"
 

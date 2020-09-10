@@ -6,7 +6,6 @@ export const updateGist = async (
   gistId: string,
   content: any
 ) => {
-  const url = "https://api.github.com/gists"
   const data = JSON.stringify({
     files: {
       "todo.md": {

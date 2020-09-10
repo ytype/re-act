@@ -4,7 +4,6 @@ import "./style.scss"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { updateGist } from "../../../../util/gist/update"
-import { stat } from "fs"
 
 const SaveButton = ({ content }: any) => {
   const onClickHandler = async () => {
@@ -34,7 +33,7 @@ const SaveButton = ({ content }: any) => {
         draggable
       />
       <button onClick={onClickHandler} className="gist-btn">
-        <img src={gist} className="gist" />
+        <img src={gist} className="gist" alt="gist" />
         <p>Save on Gist</p>
       </button>
     </div>

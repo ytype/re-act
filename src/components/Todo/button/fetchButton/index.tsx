@@ -40,7 +40,7 @@ const FetchButton = ({ items, setIndex, setItems }: props) => {
         draggable
       />
       <button onClick={onClickHandler} className="gist-btn">
-        <img src={gist} className="gist" />
+        <img src={gist} className="gist" alt="gist" />
         <p>fetch Data</p>
       </button>
     </div>

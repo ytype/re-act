@@ -2,7 +2,6 @@ import React from "react"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Auth from "../page/Auth"
 import Index from "../page/Index"
-import Todo from "../page/Index"
 
 const Router = () => {
   return (

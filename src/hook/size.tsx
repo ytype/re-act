@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
 const useWindowWidth = () => {
   //함수형 컴포넌트 이름은 대문자로 시작해야함

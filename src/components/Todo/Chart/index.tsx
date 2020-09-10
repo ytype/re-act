@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import ReactApexChart from "react-apexcharts"
 import useWindowWidth from "../../../hook/size"
-import { calcTime } from "../../../util/time"
 import ApexCharts from "apexcharts"
 import "./style.scss"
 
