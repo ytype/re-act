@@ -1,10 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect } from "react"
 import Item from "../Item"
 import { Iitem } from "../../../types/index"
 import Chart from "../Chart"
 import { calcTime } from "../../../util/time"
 import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer, toast } from "react-toastify"
+import { jsonToMd } from "../../../util/gist/markdown"
+import SaveButton from "../button/saveButton/index"
+import FetchButton from "../button/fetchButton/index"
 
 const List = () => {
   const [items, setItems] = useState<Iitem[]>([])
@@ -15,7 +18,7 @@ const List = () => {
     setInputText(e.target.value)
   }
 
-  const addItem = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const addItem = () => {
     if (inputText) {
       const newItem = {
         id: index,
@@ -89,6 +92,11 @@ const List = () => {
     />
   ))
 
+  const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    addItem()
+  }
+
   return (
     <div>
       <ToastContainer
@@ -97,13 +105,14 @@ const List = () => {
         hideProgressBar
         draggable
       />
-      <p onClick={() => console.log(items)}>{timeArr}</p>
       <Chart timeArr={timeArr} />
-      <input value={inputText} onChange={onChangeText} />
+      <SaveButton content={items} />
+      <FetchButton items={items} setItems={setItems} />
       {itemList}
-      <button type="submit" onClick={addItem}>
-        submit
-      </button>
+      <form onSubmit={onFormSubmit}>
+        <input value={inputText} onChange={onChangeText} />
+        <button type="submit">submit</button>
+      </form>
     </div>
   )
 }

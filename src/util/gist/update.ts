@@ -1,6 +1,11 @@
 import axios from "axios"
+import { jsonToMd } from "./markdown"
 
-export const updateGist = async (gistId: string, token: string) => {
+export const updateGist = async (
+  token: string,
+  gistId: string,
+  content: any
+) => {
   const url = "https://api.github.com/gists"
   const data = JSON.stringify({
     files: {
@@ -8,15 +13,13 @@ export const updateGist = async (gistId: string, token: string) => {
         filename: "todo.md",
         type: "text/markdown",
         language: "Markdown",
-        truncated: true,
-        content: "axios 테스트",
+        content: jsonToMd(content),
       },
       "todo.json": {
         filename: "todo.json",
         type: "application/json",
         language: "JSON",
-        truncated: false,
-        content: "{'filename':'hello.txt'}",
+        content: JSON.stringify(content),
       },
     },
   })
@@ -31,7 +34,6 @@ export const updateGist = async (gistId: string, token: string) => {
     },
     data: data,
   }
-
   const res = await axios(config)
   return res
 }

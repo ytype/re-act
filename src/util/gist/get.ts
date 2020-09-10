@@ -5,8 +5,12 @@ export const getRawUrl = async (gistId: string) => {
   let raw_url = ""
   await axios.get(`${url}/${gistId}`).then((response) => {
     const files: any = response.data.files
-    const fileName: string = Object.keys(files)[0]
-    raw_url = files[fileName].raw_url
+    const fileName: string = "todo.json"
+    try {
+      raw_url = files[fileName].raw_url
+    } catch {
+      throw new Error("todo.json이 없음")
+    }
   })
   return raw_url
 }
@@ -18,14 +22,4 @@ export const getGist = async (gistId: string) => {
     data = response.data
   })
   return data
-}
-
-export const IsValid = () => {
-  const ghToken = localStorage["ghToken"]
-  const gistId = localStorage["gistId"]
-  if (ghToken && gistId) {
-    return true
-  } else {
-    return false
-  }
 }

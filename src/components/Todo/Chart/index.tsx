@@ -33,6 +33,9 @@ const Chart = ({ timeArr }: any) => {
           .fill(10)
           .map((x, y) => String(x + y)),
       },
+      yaxis: {
+        allowDecimals: true,
+      },
     },
   })
 
