@@ -9,16 +9,23 @@ import { Iitem } from "../../../../types/index"
 
 type props = {
   items: Iitem[]
+  setIndex(num: number): void
   setItems(items: Iitem[]): void
 }
-const FetchButton = ({ items, setItems }: props) => {
+const FetchButton = ({ items, setIndex, setItems }: props) => {
   const onClickHandler = async () => {
     try {
-      console.log(items)
       const res = JSON.parse(
         JSON.stringify(await getGist(localStorage["gistId"]))
       )
       setItems(res)
+      let maxnum = 0
+      res.forEach((item: Iitem) => {
+        if (maxnum < item.id) {
+          maxnum = item.id
+        }
+      })
+      setIndex(maxnum + 1)
       toast("😉 gist 데이터를 불러왔습니다!")
     } catch {
       toast.error("😠 데이터를 불러오지 못했습니다.")

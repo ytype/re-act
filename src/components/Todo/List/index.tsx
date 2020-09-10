@@ -107,7 +107,7 @@ const List = () => {
       />
       <Chart timeArr={timeArr} />
       <SaveButton content={items} />
-      <FetchButton items={items} setItems={setItems} />
+      <FetchButton setIndex={setIndex} items={items} setItems={setItems} />
       {itemList}
       <form onSubmit={onFormSubmit}>
         <input value={inputText} onChange={onChangeText} />
